@@ -42,6 +42,50 @@ const Terminal = ({ history, currentInput, setCurrentInput, onCommand, isTyping 
     }
   };
 
+  const handleLinkClick = (text: string) => {
+    // Check if the text contains a URL
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const match = text.match(urlRegex);
+    if (match) {
+      window.open(match[0], '_blank');
+    }
+  };
+
+  const renderLine = (line: string, index: number) => {
+    // Check if line contains a URL
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    if (urlRegex.test(line)) {
+      const parts = line.split(urlRegex);
+      return (
+        <div key={index} className={`${line.startsWith('$') ? 'text-green-300' : 'text-green-400'} whitespace-pre-wrap`}>
+          {parts.map((part, partIndex) => {
+            if (urlRegex.test(part)) {
+              return (
+                <span
+                  key={partIndex}
+                  className="text-blue-400 underline cursor-pointer hover:text-blue-300 transition-colors"
+                  onClick={() => handleLinkClick(part)}
+                >
+                  {part}
+                </span>
+              );
+            }
+            return part;
+          })}
+        </div>
+      );
+    }
+
+    return (
+      <div 
+        key={index} 
+        className={`${line.startsWith('$') ? 'text-green-300' : 'text-green-400'} whitespace-pre-wrap`}
+      >
+        {line}
+      </div>
+    );
+  };
+
   return (
     <div 
       className="min-h-screen bg-black text-green-400 p-4 cursor-text"
@@ -57,14 +101,7 @@ const Terminal = ({ history, currentInput, setCurrentInput, onCommand, isTyping 
       <div id="terminal-content" className="max-h-[calc(100vh-100px)] overflow-y-auto">
         {/* History */}
         <div className="space-y-1">
-          {history.map((line, index) => (
-            <div 
-              key={index} 
-              className={`${line.startsWith('$') ? 'text-green-300' : 'text-green-400'} whitespace-pre-wrap`}
-            >
-              {line}
-            </div>
-          ))}
+          {history.map((line, index) => renderLine(line, index))}
         </div>
 
         {/* Current Input Line */}

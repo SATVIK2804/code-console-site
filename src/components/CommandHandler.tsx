@@ -1,4 +1,3 @@
-
 const CommandHandler = {
   execute: (command: string): string[] => {
     const [cmd, ...args] = command.split(' ');
@@ -45,18 +44,22 @@ const CommandHandler = {
           "🚀 E-Commerce Platform",
           "   Tech: React, Node.js, PostgreSQL, AWS",
           "   A full-stack e-commerce solution with real-time inventory",
+          "   Live: https://ecommerce-demo.jasonmyers.dev",
           "",
           "📱 Task Management App",
           "   Tech: React Native, Firebase, Redux",
           "   Cross-platform mobile app for team collaboration",
+          "   Live: https://taskapp.jasonmyers.dev",
           "",
           "🤖 AI Chat Bot",
           "   Tech: Python, OpenAI API, FastAPI",
           "   Intelligent customer service automation",
+          "   Live: https://chatbot-demo.jasonmyers.dev",
           "",
           "🌐 Portfolio Website",
           "   Tech: React, TypeScript, Tailwind CSS",
           "   This terminal-themed portfolio you're viewing right now!",
+          "   Live: https://jasonmyers.dev",
           "",
           "Type 'github' to see more projects on GitHub"
         ];
