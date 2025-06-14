@@ -99,8 +99,40 @@ const Terminal = ({ history, currentInput, setCurrentInput, onCommand, isTyping 
   const renderLine = (line: string, index: number) => {
     const baseColor = getLineColor(line);
     
-    // Check if line contains a URL
+    // Check if line contains HTML-like color spans
+    const colorSpanRegex = /<span class='([^']+)'>([^<]+)<\/span>/g;
     const urlRegex = /(https?:\/\/[^\s]+)/g;
+    
+    if (colorSpanRegex.test(line)) {
+      const parts = line.split(colorSpanRegex);
+      return (
+        <div key={index} className={`${baseColor} whitespace-pre-wrap`}>
+          {parts.map((part, partIndex) => {
+            // Check if this part is a class name (every 3rd element starting from 1)
+            if ((partIndex - 1) % 3 === 0) {
+              const colorClass = part;
+              const text = parts[partIndex + 1];
+              return (
+                <span key={partIndex} className={colorClass}>
+                  {text}
+                </span>
+              );
+            }
+            // Skip the text parts as they're handled above
+            if ((partIndex - 2) % 3 === 0) {
+              return null;
+            }
+            // Return regular text parts
+            if (partIndex % 3 === 0) {
+              return part;
+            }
+            return null;
+          })}
+        </div>
+      );
+    }
+    
+    // Check if line contains a URL
     if (urlRegex.test(line)) {
       const parts = line.split(urlRegex);
       return (

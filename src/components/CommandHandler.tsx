@@ -7,17 +7,17 @@ const CommandHandler = {
       case 'h':
         return [
           "Available commands:",
-          "  help, h          - Show this help message",
-          "  about, whoami    - Learn about me",
-          "  projects, ls     - View my projects",
-          "  skills           - See my technical skills",
-          "  contact          - Get in touch",
-          "  experience       - View work experience",
-          "  education        - Academic background",
-          "  clear, cls       - Clear terminal",
-          "  github           - Open GitHub profile",
-          "  linkedin         - Open LinkedIn profile",
-          "  resume           - Download resume"
+          "  help, h          - <span class='text-red-400'>Show this help message</span>",
+          "  about, whoami    - <span class='text-green-400'>Learn about me</span>",
+          "  projects, ls     - <span class='text-blue-400'>View my projects</span>",
+          "  skills           - <span class='text-yellow-400'>See my technical skills</span>",
+          "  contact          - <span class='text-red-400'>Get in touch</span>",
+          "  experience       - <span class='text-green-400'>View work experience</span>",
+          "  education        - <span class='text-blue-400'>Academic background</span>",
+          "  clear, cls       - <span class='text-yellow-400'>Clear terminal</span>",
+          "  github           - <span class='text-red-400'>Open GitHub profile</span>",
+          "  linkedin         - <span class='text-green-400'>Open LinkedIn profile</span>",
+          "  resume           - <span class='text-blue-400'>Download resume</span>"
         ];
 
       case 'about':
